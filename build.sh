@@ -2,6 +2,7 @@
 
 set -e;
 source './helpers/installDocker.sh';
+source './helpers/gpuDriver.sh';
 
 D_LIBRARY=${1};
 GPU_TYPE=${2};
@@ -52,9 +53,8 @@ then
 fi
 
 dockerInstall;
-dockerPostInstall;
-# TODO install gpu version docker image
+kernelGpuDriver;
 # TODO install steam in docker
 
 # get GPU kernel driver 
-# lspci -k |grep -EA3 'VGA|3D|DISPLAY' |grep 'Kernel modules'
+# lspci -k |grep -EA3 'VGA|3D|DISPLAY' |grep -m 1 -oP 'Kernel modules (.*)'

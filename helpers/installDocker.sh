@@ -30,19 +30,7 @@ function installDependencies(){
     echo "[INFO] - Done!"
 
 }
-# Main #
-function dockerInstallation(){
-    installDependencies;
-    sleep 1;
-    addGPGKey;
-    sleep 1;
-    setUpRepository;
-    sleep 1;
-    installDockerEngine;
-}
 
-
-# Main #
 function checkGroupExist(){
     if [ ! -z $(groups |grep -m 1 -oP 'docker') ]
     then
@@ -51,6 +39,7 @@ function checkGroupExist(){
         echo "false";
     fi
 }
+# Main #
 function dockerPostInstall(){
     echo "[INFO] - Add user to group.";
     local isGroup=$(checkGroupExist);
@@ -77,6 +66,19 @@ function dockerPostInstall(){
     sleep 1;
     systemctl daemon-reload 
     echo "[INFO] - Done!"
+}
+
+# Main #
+function dockerInstallation(){
+    installDependencies;
+    sleep 1;
+    addGPGKey;
+    sleep 1;
+    setUpRepository;
+    sleep 1;
+    installDockerEngine;
+    sleep 1;
+    dockerPostInstall;
 }
 
 # TODO

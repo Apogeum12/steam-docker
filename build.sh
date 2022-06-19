@@ -53,5 +53,8 @@ fi
 
 dockerInstall;
 dockerPostInstall;
+# TODO install gpu version docker image
+# TODO install steam in docker
+
 # get GPU kernel driver 
 # lspci -k |grep -EA3 'VGA|3D|DISPLAY' |grep 'Kernel modules'
